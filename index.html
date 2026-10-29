@@ -141,6 +141,10 @@
     .entry .fig{position:relative;transform-origin:left center;transition:transform .45s cubic-bezier(.25,.8,.25,1),box-shadow .45s ease;cursor:zoom-in}
     .entry .fig:hover,.entry .fig:focus-visible{transition-duration:.7s;transition-delay:.15s;transform:scale(2.2);z-index:5;box-shadow:0 12px 40px rgba(20,16,10,.3)}
   }
+  /* the SHARP diagram has small text, so it grows more where there is room */
+  @media (hover:hover) and (min-width:1100px){
+    #project-sharp .fig:hover,#project-sharp .fig:focus-visible{transform:scale(3.2)}
+  }
   @media (prefers-reduced-motion: reduce){.entry .fig{transition:none}}
   .flow{margin:0;border:1px solid var(--line);padding:1rem;font-family:var(--mono);font-size:.74rem;line-height:1.35;white-space:pre;overflow-x:auto;color:var(--muted)}
   .flow b{color:var(--ink)}
