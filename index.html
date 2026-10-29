@@ -25,9 +25,6 @@
     --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
     --maxw:1120px; --pad:clamp(1.1rem,4vw,2rem);
   }
-  @media (prefers-color-scheme: dark){
-    :root{--bg:#21251D; --ink:#E3E6D8; --muted:#A3A891; --line:#363B2F; --olive:#C7D47A; --todo:#D9AE52; --todo-bg:#3A3122; --fig-bg:#E6E8DC;}
-  }
   :root[data-theme="light"]{--bg:#FCFCF8; --ink:#1E2318; --muted:#5E6450; --line:#D9DBC9; --olive:#4C5A2C; --todo:#9A6B12; --todo-bg:#FBF3DC; --fig-bg:#fff;}
   :root[data-theme="dark"]{--bg:#21251D; --ink:#E3E6D8; --muted:#A3A891; --line:#363B2F; --olive:#C7D47A; --todo:#D9AE52; --todo-bg:#3A3122; --fig-bg:#E6E8DC;}
 
@@ -84,7 +81,6 @@
   .band{--b-bg:#1A2013;--b-box:#12170C;--b-line:#39422A;--b-ink:#ECEDE0;--b-muted:#A3A88F;--b-dim:#6F755D;--b-signal:#C9DC6B;--b-bar:#34431F;
     background:var(--b-bg);color:var(--b-ink);padding-block:clamp(2.4rem,5vw,3.6rem)}
   :root[data-theme="dark"] .band{--b-bg:#191C15;--b-box:#131510;--b-line:#30352A;--b-bar:#3A3E25;--b-ink:#E3E6D8;--b-muted:#A3A891;--b-dim:#77766C;--b-signal:#C7D47A}
-  @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .band{--b-bg:#191C15;--b-box:#131510;--b-line:#30352A;--b-bar:#3A3E25;--b-ink:#E3E6D8;--b-muted:#A3A891;--b-dim:#77766C;--b-signal:#C7D47A}}
   .band h2{font-family:var(--serif);font-weight:600;font-size:clamp(1.8rem,3.6vw,2.4rem);line-height:1.15}
   .band .band-lede{margin-top:1rem;font-family:var(--serif);font-size:1.25rem;line-height:1.35;color:var(--b-ink);width:fit-content;margin-inline:auto}
   .band a{color:var(--b-signal)}
@@ -614,11 +610,8 @@
   "use strict";
   var root=document.documentElement;
 
-  /* theme toggle */
-  function isDark(){
-    var t=root.getAttribute("data-theme");
-    return t ? t==="dark" : window.matchMedia("(prefers-color-scheme: dark)").matches;
-  }
+  /* theme toggle: the page always opens in light mode, whatever the system setting */
+  function isDark(){return root.getAttribute("data-theme")==="dark";}
   var toggle=document.getElementById("themeToggle");
   function label(){
     var dark=isDark();
@@ -631,7 +624,6 @@
     root.setAttribute("data-theme",next);
     label();
   });
-  if(window.matchMedia){var mq=window.matchMedia("(prefers-color-scheme: dark)"); if(mq.addEventListener) mq.addEventListener("change",label);}
   document.getElementById("year").textContent=new Date().getFullYear();
 
   /* ---------- ASCII animations for the two research directions ---------- */
